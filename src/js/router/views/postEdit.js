@@ -3,16 +3,16 @@ import { onUpdatePost, getPostData } from "../../ui/post/update.js";
 
 authGuard();
 
-const form = document.getElementById('editPostForm');
+const form = document.getElementById('edit-posts-form');
 
     if (form) {
 
         console.log('Form found, adding event listener for submit');
 
         form.addEventListener('submit', (event) => {
-            console.log('Submit event triggered');  // Debug log
+            console.log('Submit event triggered');
 
-            onUpdatePost(event);  // Call onUpdatePost when form is submitted
+            onUpdatePost(event);
         });
 
         const postId = localStorage.getItem('editPostId');

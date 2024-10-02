@@ -26,4 +26,3 @@ export async function updatePost(id, {title, body, media}) {
         }
     return { data, ok: response.ok };
 }
-
