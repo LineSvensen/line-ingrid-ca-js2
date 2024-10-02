@@ -1,16 +1,27 @@
-import { deletePost } from "src/js/api/post/delete.js";
+import {deletePost} from "../../api/post/delete.js";
 
 export async function onDeletePost(event) {
-    const deleteBtn = document.getElementById('delete-btn');
-    const dropDown = document.getElementById('post-dropdown');
+    event.preventDefault();
 
-    deleteBtn.addEventListener('click', async () => {
-        const confirmed = confirm('Are you sure you want to delete this post?');
-        if (confirmed) {
-            const postId = dropDown.value;
-            await deletePost(postId);
-            alert('post deleted successfully!');
-            location.reload();
+    const postId = localStorage.getItem('editPostId');
+    if (!postId) {
+        console.error('No postId found in local storage.');
+        return;
+    }
+
+    const confirmDelete = confirm('Are you sure you want to delete this post?');
+    if (confirmDelete) {
+        try {
+            const response = await deletePost(postId);  // Call deletePost function directly
+            if (response.ok) {
+                alert('Post deleted successfully!');
+                window.location.href = '/profile/';
+            } else {
+                alert('Failed to delete the post.');
+            }
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            alert('An error occurred while deleting the post.');
         }
-    })
+    }
 }

@@ -22,7 +22,6 @@ export async function getPostData() {
     }
 }
 
-
 export async function onUpdatePost(event) {
     event.preventDefault();
 
@@ -57,3 +56,5 @@ export async function onUpdatePost(event) {
         alert('An error occurred while updating the post.');
     }
 }
+
+
