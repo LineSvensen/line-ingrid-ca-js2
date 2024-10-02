@@ -4,6 +4,17 @@ import { onDeletePost } from "../../ui/post/delete.js";
 
 authGuard();
 
+/**
+ * Event listener for form submission.
+ *
+ * @param {Event} event - The event object triggered by form submission.
+ */
+
+/**
+ * Fetches post data if postId is found in local storage.
+ * @param {string|null} postId - The ID of the post to be edited, retrieved from local storage.
+ */
+
 const form = document.getElementById('edit-posts-form');
 const deleteBtn = document.getElementById('delete-btn');
 
