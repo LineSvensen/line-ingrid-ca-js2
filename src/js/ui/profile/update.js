@@ -1,41 +1,31 @@
-// ui/profile/update.js
 import { updateProfile } from "../../api/profile/update.js";
-import { readProfile } from "../../api/profile/read.js";
-
+/**
+ * Handles the profile update form submission.
+ * @param {Event} event - The event triggered by the form submission.
+ * @returns {Promise<void>}
+ */
 export async function onUpdateProfile(event) {
-    event.preventDefault(); // Prevent default form submission
-    console.log("Starting profile update..."); // Debugging line
+    event.preventDefault();
 
-    // Gather data from input fields
     const avatarUrl = document.getElementById('avatar-url').value;
     const bannerUrl = document.getElementById('banner-url').value;
     const bio = document.getElementById('bio').value;
     const username = localStorage.getItem('loggedInUsername');
 
-    console.log('Data gathered:', { avatarUrl, bannerUrl, bio, username }); // Log gathered data
-
-    // Construct the update payload
     const updateData = {
         bio: bio || undefined,
         banner: bannerUrl ? { url: bannerUrl, alt: 'pink' } : undefined,
         avatar: avatarUrl ? { url: avatarUrl, alt: 'me' } : undefined,
     };
 
-    // Filter out any undefined values
     const filteredUpdateData = Object.fromEntries(
         Object.entries(updateData).filter(([_, v]) => v != null)
     );
 
-    console.log('Filtered update data:', filteredUpdateData); // Log the filtered data
-
     try {
-        // Check if there's anything to update
         if (Object.keys(filteredUpdateData).length > 0) {
-            console.log("Sending update request..."); // Log before sending request
             const updatedProfile = await updateProfile(username, filteredUpdateData);
-            console.log('Profile updated successfully:', updatedProfile); // Log the updated profile
 
-            // Update the profile UI
             const profileDetails = document.getElementById('profile-details');
             profileDetails.innerHTML = `
                 <div class="profile-info">
@@ -50,21 +40,17 @@ export async function onUpdateProfile(event) {
                 </div>
             `;
         } else {
-            console.warn('No changes made to the profile.');
+            alert('No changes made to the profile.');
         }
     } catch (error) {
-        console.error('Failed to update profile:', error);
+        alert('Failed to update profile');
     }
 }
 
-
-
-// Ensure the DOM is fully loaded before adding the event listener
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('update-profile-form');
     if (form) {
         form.addEventListener('submit', (event) => {
-            console.log('Form submitted');  // Debugging line to verify event trigger
             onUpdateProfile(event);
         });
     } else {

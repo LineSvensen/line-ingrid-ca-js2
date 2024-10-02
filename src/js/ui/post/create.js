@@ -1,34 +1,34 @@
-
 import { createPost } from "../../api/post/create.js";
 
+/**
+ * Function to handle post creation
+ * @param {Event} event - The event triggered by the form submission.
+ */
 
-// Function to handle post creation
 export async function onCreatePost(event) {
     event.preventDefault();
 
-    // Gather the form input values
     const titleInput = event.target.title;
     const bodyInput = event.target.body;
     const mediaInput = event.target.media;
     const altInput = event.target.alt;
     const tagInput = event.target.tag;
 
-    // Check if inputs exist
     if (!titleInput || !mediaInput || !tagInput) {
         alert("Please fill in all required fields.");
         return;
     }
 
-    const title = titleInput.value;   // Required
-    const body = bodyInput ? bodyInput.value : ""; // Optional
+    const title = titleInput.value;
+    const body = bodyInput ? bodyInput.value : "";
     const media = {
-        url: mediaInput.value,        // Media URL from the form
-        alt: altInput ? altInput.value : "",    // Optional alt text from the form
+        url: mediaInput.value,
+        alt: altInput ? altInput.value : "",
     };
-    const tags = [tagInput.value];     // Assuming a tag input in your form
+    const tags = [tagInput.value];
 
     try {
-        // Call createPost with the gathered details
+
         const { data, ok } = await createPost({ title, body, media, tags });
 
         if (ok) {
@@ -38,14 +38,5 @@ export async function onCreatePost(event) {
         }
     } catch (error) {
         alert("Error occurred while creating the post. Please try again.");
-        console.error(error);
     }
 }
-
-// Add event listener to form submission
-// document.addEventListener('DOMContentLoaded', () => {
-//     const form = document.getElementById('create-form');
-//     if (form) {
-//         form.addEventListener('submit', onCreatePost);
-//     }
-// });

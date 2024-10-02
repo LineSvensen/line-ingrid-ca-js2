@@ -6,9 +6,11 @@ authGuard();
 const form = document.getElementById('edit-posts-form');
 
     if (form) {
-
-        console.log('Form found, adding event listener for submit');
-
+        /**
+         * Handles the form submission for updating a post.
+         *
+         * @param {Event} event - The event object representing the form submission.
+         */
         form.addEventListener('submit', (event) => {
             console.log('Submit event triggered');
 
