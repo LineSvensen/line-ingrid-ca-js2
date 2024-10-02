@@ -21,9 +21,26 @@
     <div id="posts-grid"></div>
 
 <!--    just to check create page-->
-    
+
+    <!-- profile/index.html -->
     <form id="update-profile-form" name="updateProfile">
-      <button>Update Profile</button>
+      <div>
+        <label for="avatar-url">Avatar URL:</label>
+        <input type="url" id="avatar-url" name="avatar-url" placeholder="Enter avatar URL">
+      </div>
+      <div>
+        <label for="banner-url">Banner URL:</label>
+        <input type="url" id="banner-url" name="banner-url" placeholder="Enter banner URL">
+      </div>
+      <div>
+        <label for="bio">Bio:</label>
+        <textarea id="bio" name="bio" placeholder="Enter your bio"></textarea>
+      </div>
+      <button type="submit">Update Profile</button>
     </form>
+
+
+
+
   </body>
 </html>

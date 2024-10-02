@@ -86,3 +86,26 @@ async function renderProfile() {
 }
 
 renderProfile();
+
+
+// router/views/router.js
+
+async function populateProfileForm() {
+    const loggedInUsername = localStorage.getItem('loggedInUsername');
+    if (!loggedInUsername) {
+        console.error('No username found in localStorage.');
+        return;
+    }
+
+    try {
+        const profileData = await readProfile(loggedInUsername);
+
+        document.getElementById('avatar-url').value = profileData.data.avatar.url || '';
+        document.getElementById('banner-url').value = profileData.data.banner.url || '';
+        document.getElementById('bio').value = profileData.data.bio || '';
+    } catch (error) {
+        console.error('Error fetching profile data:', error);
+    }
+}
+
+window.addEventListener('load', populateProfileForm);
