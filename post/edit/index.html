@@ -7,11 +7,20 @@
     <script src="/src/app.js" type="module"></script>
     <link href="../../src/css/style.css" rel="stylesheet">
 </head>
+<nav>
+<div class="nav">
+    <div class="user-nav"></div>
+    <div class="buttons-nav">
+        <button><a class="my-profile" href="/">Home</a></button>
+        <button><a class="my-profile" href="/profile/">My Profile</a></button>
+        <button id="logout-btn">Logout</button>
+    </div>
+</div>
+</nav>
 <body>
     <h1>Edit Post</h1>
     <button><a href="/profile/">Back</a></button>
-    <button><a class="my-profile" href="/profile/">My Profile</a></button>
-    <button id="logout-btn">Logout</button>
+    
     <form id="edit-posts-form">
         <label for="title">Title:</label>
         <input id="title" name="title" required type="text">

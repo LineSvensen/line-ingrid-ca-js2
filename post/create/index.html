@@ -7,11 +7,19 @@
   <script type="module" src="../../src/app.js"></script>
   <link href="../../src/css/style.css" rel="stylesheet">
 </head>
+<nav>
+<div class="nav">
+  <div class="user-nav"></div>
+  <div class="buttons-nav">
+    <button><a class="my-profile" href="/">Home</a></button>
+    <button><a class="my-profile" href="/profile/">My Profile</a></button>
+    <button id="logout-btn">Logout</button>
+  </div>
+</div>
+</nav>
 <body>
   <h1>Create Post</h1>
-  <button><a class="my-profile" href="/profile/">My Profile</a></button>
   <button><a href="/profile/">Back</a></button>
-  <button id="logout-btn">Logout</button>
   <form id="create-form" name="createPost">
     <div>
       <label for="title">Title:</label>
