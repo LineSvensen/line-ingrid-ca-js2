@@ -3,8 +3,11 @@ import {getKey} from "../auth/key.js";
 
 // GET SINGLE POST
 export async function readPost(id) {
-    const accessToken = await getKey();
 
+    console.log('called with postid', id);
+
+    const accessToken = await getKey();
+    console.log(accessToken);
     const params = { _author: true, _reactions: true, _comments: true };
 
     const options = {

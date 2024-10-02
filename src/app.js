@@ -1,5 +1,4 @@
 import "./css/style.css";
-import {readProfile} from "./js/api/profile/read.js";
 
 import router from "./js/router";
 

@@ -68,3 +68,7 @@
 .post-title {
     margin-bottom: 0;
 }
+
+.post-edit-btn {
+    cursor: pointer;
+}

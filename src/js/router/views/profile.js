@@ -10,26 +10,13 @@ async function renderProfile() {
 
     const usernameToUse = profileUsername || loggedInUsername;
 
-    console.log('USERNAME', usernameToUse)
-
     if (!usernameToUse) {
         console.error('no username found in localstorage');
         return;
     }
 
-    if (usernameToUse === profileUsername) {
-        document.getElementById('create-post-btn').style.display = 'none';
-        document.getElementById('edit-post-btn').style.display = 'none';
-        document.getElementById('update-profile-form').style.display = 'none';
-    } else {
-        document.getElementById('create-post-btn').style.display = 'block';
-        document.getElementById('edit-post-btn').style.display = 'block';
-        document.getElementById('update-profile-form').style.display = 'block'
-    }
-
     try {
         const profileData = await readProfile(usernameToUse);
-        console.log(profileData);
 
         const profileDetails = document.getElementById('profile-details');
         profileDetails.innerHTML = `
@@ -64,10 +51,14 @@ async function renderProfile() {
         `;
             postGrid.innerHTML += postHTML;
         });
+
         document.querySelectorAll('.post-edit-btn').forEach((postElement) => {
+            if (usernameToUse === profileUsername) {
+                postElement.style.display = 'none';
+            }
             postElement.addEventListener('click', function () {
                 const postId = postElement.getAttribute('data-id');
-                localStorage.setItem('postId', postId);
+                localStorage.setItem('editPostId', postId);
                 window.location.replace('/post/edit/');
             })
         });
@@ -81,6 +72,16 @@ async function renderProfile() {
         });
     } catch (error) {
         console.error('Error rendering profile or posts:', error)
+    }
+
+    if (usernameToUse === profileUsername) {
+        document.getElementById('create-post-btn').style.display = 'none';
+        document.getElementById('edit-post-btn').style.display = 'none';
+        document.getElementById('update-profile-form').style.display = 'none';
+    } else {
+        document.getElementById('create-post-btn').style.display = 'block';
+        document.getElementById('edit-post-btn').style.display = 'block';
+        document.getElementById('update-profile-form').style.display = 'block';
     }
 }
 

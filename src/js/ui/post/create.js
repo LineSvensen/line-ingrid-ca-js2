@@ -1,5 +1,5 @@
 
-import { createPost } from "../../api/post/create.js"; // Adjust the path as necessary
+import { createPost } from "../../api/post/create.js";
 
 
 // Function to handle post creation
@@ -33,7 +33,6 @@ export async function onCreatePost(event) {
 
         if (ok) {
             alert("Post created successfully!");
-            // You may want to redirect or update the UI here
         } else {
             alert("Registration failed. " + (data.errors[0].message || "Check your input and try again."));
         }
@@ -44,9 +43,9 @@ export async function onCreatePost(event) {
 }
 
 // Add event listener to form submission
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('create-form'); // Make sure this ID matches your HTML
-    if (form) {
-        form.addEventListener('submit', onCreatePost);
-    }
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//     const form = document.getElementById('create-form');
+//     if (form) {
+//         form.addEventListener('submit', onCreatePost);
+//     }
+// });

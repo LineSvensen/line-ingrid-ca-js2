@@ -1,103 +1,59 @@
 import { updatePost } from "../../api/post/update.js";
-import { API_SOCIAL_POSTS, API_KEY } from '../../api/constants.js';
-import { fetchPostData } from "../../api/post/update.js";
-// Get post ID from local storage
-// const id = localStorage.getItem('postId');
+import {readPost} from "../../api/post/read.js";
 
-export async function onUpdatePost(event) {
-    event.preventDefault(); // Prevent default form submission behavior
-
-    const title = document.getElementById('title').value;
-    const body = document.getElementById('body').value;
-    const mediaUrl = document.getElementById('media').value; // Assuming there's an input field for media URL
-    const id = localStorage.getItem('postId'); // Ensure you retrieve the correct id
-
+export async function getPostData() {
     try {
-        const updatedPost = await updatePost(id, { // Use id here
-            title,
-            body,
-            media: {
-                url: mediaUrl,
-                alt: '' // Add alt text if needed
-            }
-        });
+        const postId = localStorage.getItem('editPostId')
+        const data = await readPost(postId);
 
-        console.log('Post updated successfully:', updatedPost);
+        if (!data || !data.data) {
+            return;
+        }
 
-        // Clear postId from local storage
-        localStorage.removeItem('postId');
+        const post = data.data;
 
-        // Optionally redirect or show a success message
-        window.location.href = '/profile/index.html'; // Change to your desired redirect path
+        document.getElementById('title').value = post.title || '';
+        document.getElementById('body').value = post.body || '';
+        document.getElementById('urlMedia').value = post.media.url || '';
+        document.getElementById('altMedia').value = post.media.alt || '';
 
     } catch (error) {
-        console.error('Failed to update post:', error);
+        console.error('Error fetching post data:', error);
     }
 }
 
 
-// Load post data and populate the form when the page loads
-// Window load event to autofill form fields
+export async function onUpdatePost(event) {
+    event.preventDefault();
 
-window.addEventListener('load', async () => {
-    const id = localStorage.getItem('postId'); // Use id instead of postId
-    const form = document.getElementById('editPostForm');
-    if (id) { // Check if id exists
-        try {
-            const postData = await fetchPostData(id); // Use id here
-            console.log('Fetched Post Data:', postData); // Log the fetched post data
-
-            // Populate the form fields with the fetched data
-            document.getElementById('title').value = postData.title || '';
-            document.getElementById('body').value = postData.body || '';
-            document.getElementById('media').value = postData.media.url || '';
-
-        } catch (error) {
-            console.error('Failed to populate form:', error);
-        }
-    } else {
-        console.error('No id found in local storage.');
-        // Optionally, redirect or display a message
+    const postId = localStorage.getItem('editPostId');
+    if (!postId) {
+        console.error('No postId found in local storage.');
+        return;
     }
 
-    form.addEventListener("submit", onUpdatePost); // Attach the submit handler
-});
+    try {
 
+        const postTitle = document.getElementById('title').value;
+        const postBody = document.getElementById('body').value;
+        const postMediaUrl = document.getElementById('urlMedia').value;
+        const postMediaAlt = document.getElementById('altMedia').value;
 
+        const updatedPostData = {
+            title: postTitle,
+            body: postBody,
+            media: { url: postMediaUrl, alt: postMediaAlt}
+        };
 
-// Attach the submit handler
-document.getElementById('editPostForm').addEventListener('submit', onUpdatePost);
+        const response = await updatePost(postId, updatedPostData);
 
-
-
-
-
-
-// export async function onUpdatePost(event) {
-//     event.preventDefault();
-//
-//     const postId = event.target.dataset.postId;
-//     const title = document.querySelector('#post-title').value;
-//     const body = document.querySelector('#post-body').value;
-//     const mediaUrl = document.querySelector('#post-media-url').value;
-//     const mediaAlt = document.querySelector('#post-media-alt').value;
-//
-//     const updatedPost = await updatePost(postId, {
-//         title,
-//         body,
-//         media: {
-//             url: mediaUrl,
-//             alt: mediaAlt
-//         }
-//     });
-//
-//     if (updatedPost) {
-//         alert('Post updated successfully!');
-//         // Optionally, redirect or update the UI
-//         window.location.reload();
-//     } else {
-//         alert('Failed to update the post.');
-//     }
-// }
-//
-//
+        if (response.ok) {
+            alert('Post updated successfully!');
+        } else {
+            alert('Failed to update the post.');
+        }
+    } catch (error) {
+        console.error('Error updating post:', error);
+        alert('An error occurred while updating the post.');
+    }
+}

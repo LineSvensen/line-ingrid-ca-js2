@@ -1,23 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Noroff FED2 JS2 CA</title>
-    <script type="module" src="/src/app.js"></script>
-    <link href="src/css/style.css" rel="stylesheet">
-  </head>
-  <body>
+    <script src="/src/app.js" type="module"></script>
+    <link href="../../src/css/style.css" rel="stylesheet">
+</head>
+<body>
     <h1>Edit Post</h1>
-    <button><a href="/">Back</a></button>
-    <button><a class="my-profile" href="/profile/">My Profile</a></button>
     <button><a href="/profile/">Back</a></button>
-    <form id="editPostForm">
-      <input type="text" id="title" placeholder="Title" required>
-      <textarea id="body" placeholder="Body" required></textarea>
-      <input type="text" id="media" placeholder="Media URL" required>
-      <button type="submit">Update Post</button>
+    <button><a class="my-profile" href="/profile/">My Profile</a></button>
+    <button id="logout-btn">Logout</button>
+    <form id="edit-posts-form">
+        <label for="title">Title:</label>
+        <input id="title" name="title" required type="text">
+        
+        <label for="body">Main text:</label>
+        <textarea id="body" name="body" rows="8"></textarea>
+        
+        <label for="urlMedia">Image URL:</label>
+        <input id="urlMedia" name="url" type="url">
+        
+        <label for="altMedia">Image description:</label>
+        <input id="altMedia" name="alt" type="alt">
+        
+        <button id="submit-btn" name="submit-btn" type="submit">Submit changes</button>
+        <button id="delete-btn" name="delete-btn" type="button">Delete post</button>
     </form>
-
+</body>
 </html>
+

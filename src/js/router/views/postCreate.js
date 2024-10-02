@@ -1,11 +1,7 @@
-import { onCreatePost } from "../../ui/post/create";
 import { authGuard } from "../../utilities/authGuard";
-// import { createPost } from "../../api/post/create.js";
-// import {onRegister} from "../../ui/auth/register.js";
+import { onCreatePost } from "../../ui/post/create";
 
 authGuard();
-//
-// const form = document.forms.createPost;
 
 const form = document.getElementById('create-form');
 
