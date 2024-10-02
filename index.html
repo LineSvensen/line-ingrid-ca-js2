@@ -7,13 +7,23 @@
   <script type="module" src="/src/app.js" defer></script>
   <link href="src/css/feed-page.css" rel="stylesheet">
 </head>
+<nav>
+  <div class="nav">
+    <div class="user-nav"></div>
+    <div class="buttons-nav">
+      <button><a class="my-profile" href="/">Home</a></button>
+      <button><a class="my-profile" href="/profile/">My Profile</a></button>
+      <button id="logout-btn">Logout</button>
+    </div>
+  </div>
+</nav>
 <body>
   <h1>Home</h1>
-  <button><a class="my-profile" href="/profile/">My Profile</a></button>
-  <button id="logout-btn">Logout</button>
   <section id="post-section">
     <ul id="post-list"></ul>
-    <button id="load-more-button" style="display:none;">Load More Posts</button>
+    <div class="ajour-btn">
+      <button id="load-more-button" style="display:none;">You are à jour! Take me to the top!</button>
+    </div>
   </section>
 </body>
 </html>

@@ -6,6 +6,7 @@ import { readPost } from "../../api/post/read.js";
  */
 async function displaySinglePost() {
     const postId = localStorage.getItem('postId');
+    const loggedInUsername = localStorage.getItem('loggedInUsername');
     if (!postId) {
         return;
     }
@@ -37,12 +38,21 @@ async function displaySinglePost() {
     </div>
     `;
         document.querySelector('.wrapper-post-author').addEventListener('click', function () {
-            const username = this.getAttribute('data-username');
-            localStorage.setItem('profileUsername', username);
-            window.location.replace('/profile/');
+            const postAuthorUsername = this.getAttribute('data-username');
+
+            // Check if the post author is the logged-in user
+            if (postAuthorUsername === loggedInUsername) {
+                // If it's the logged-in user, clear `profileUsername` and go to "My Profile"
+                localStorage.removeItem('profileUsername');
+                window.location.replace('/profile/?username=' + loggedInUsername);
+            } else {
+                // Otherwise, store the author's username and go to their profile
+                localStorage.setItem('profileUsername', postAuthorUsername);
+                window.location.replace('/profile/?username=' + postAuthorUsername);
+            }
         });
     } catch (error) {
-        return;
+        console.error('Error displaying post:', error);
     }
 }
 
