@@ -27,12 +27,14 @@ export async function getPostData() {
     }
 }
 
+
 /**
  * Handles the submission of the post update form.
  * It retrieves form data, constructs an updated post object, and sends it to the server.
  * @param {Event} event - The form submission event.
  * @throws {Error} Throws an error if the postId is not found or if there is an issue updating the post.
  */
+
 export async function onUpdatePost(event) {
     event.preventDefault();
 
@@ -64,4 +66,8 @@ export async function onUpdatePost(event) {
     } catch (error) {
         alert('An error occurred while updating the post.');
     }
+
 }
+
+}
+

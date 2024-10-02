@@ -1,5 +1,6 @@
 import { createPost } from "../../api/post/create.js";
 
+
 /**
  * Function to handle post creation
  * @param {Event} event - The event triggered by the form submission.
@@ -28,7 +29,6 @@ export async function onCreatePost(event) {
     const tags = [tagInput.value];
 
     try {
-
         const { data, ok } = await createPost({ title, body, media, tags });
 
         if (ok) {
