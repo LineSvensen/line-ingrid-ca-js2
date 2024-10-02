@@ -1,6 +1,4 @@
-
 import {API_KEY, API_SOCIAL_POSTS } from "../../api/constants.js";
-=======
 
 
 export async function deletePost(id) {
