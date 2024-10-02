@@ -1,8 +1,6 @@
 import {deletePost} from "../../api/post/delete.js";
 
-export async function onDeletePost(event) {
-    event.preventDefault();
-
+export async function onDeletePost() {
     const postId = localStorage.getItem('editPostId');
     if (!postId) {
         console.error('No postId found in local storage.');

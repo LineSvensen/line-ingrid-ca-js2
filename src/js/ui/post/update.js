@@ -66,8 +66,5 @@ export async function onUpdatePost(event) {
     } catch (error) {
         alert('An error occurred while updating the post.');
     }
-
-}
-
 }
 
