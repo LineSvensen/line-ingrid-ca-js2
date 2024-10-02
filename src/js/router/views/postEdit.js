@@ -22,8 +22,30 @@ if (form) {
     console.error('Form not found.');
 }
 
+
+    if (form) {
+        /**
+         * Handles the form submission for updating a post.
+         *
+         * @param {Event} event - The event object representing the form submission.
+         */
+        form.addEventListener('submit', (event) => {
+            console.log('Submit event triggered');
+
+            onUpdatePost(event);
+        });
+
+        const postId = localStorage.getItem('editPostId');
+
+        if (postId) {
+            getPostData(postId);
+        } else {
+            console.error('No postId found in local storage.');
+        }
+
 if (deleteBtn) {
     deleteBtn.addEventListener('click', onDeletePost);  // Attach onDeletePost directly
+
 } else {
     console.error('Delete button not found.');
 }

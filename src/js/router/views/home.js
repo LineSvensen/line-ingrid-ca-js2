@@ -1,5 +1,5 @@
-import {authGuard} from "../../utilities/authGuard";
-import {readPosts} from "../../api/post/read.js";
+import { authGuard } from "../../utilities/authGuard";
+import { readPosts } from "../../api/post/read.js";
 
 authGuard();
 
@@ -10,15 +10,18 @@ const maxPostsPerPage = 62;
 const postList = document.getElementById('post-list');
 const loadMoreButton = document.getElementById('load-more-button');
 
+/**
+ * Function to render posts in the UI.
+ * @param {boolean} reset - Whether to reset the post list before rendering.
+ * @returns {Promise<void>}
+ */
 async function renderPosts(reset = false) {
     try {
-
         if (reset) {
             postList.innerHTML = '';
             fetchedPostsCount = 0;
             currentPage = 1;
         }
-
 
         const posts = await readPosts(postsPerPage, currentPage);
         fetchedPostsCount += posts.data.length;
@@ -64,18 +67,16 @@ async function renderPosts(reset = false) {
         } else {
             loadMoreButton.style.display = 'none';
         }
-    } catch (error){
-        console.error('error rendering posts', error);
+    } catch (error) {
         postList.innerHTML = '<p>Failed to load posts. Please try again later.</p>';
     }
 }
 
 window.addEventListener('scroll', function () {
-    const {scrollTop, scrollHeight, clientHeight} = document.documentElement;
-
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
     if (scrollTop + clientHeight >= scrollHeight - 10 && fetchedPostsCount < maxPostsPerPage) {
-            currentPage++;
-            renderPosts();
+        currentPage++;
+        renderPosts();
     }
 })
 

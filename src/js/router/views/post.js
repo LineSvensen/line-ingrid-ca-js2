@@ -1,19 +1,17 @@
-// alert("Single Post Page");
+import { readPost } from "../../api/post/read.js";
 
-import {readPost} from "../../api/post/read.js";
-// import {likePost} from "../../api/post/update.js";
-
-async function displaySinglePost () {
+/**
+ * Function to display a single post based on postId from localStorage.
+ * @returns {Promise<void>}
+ */
+async function displaySinglePost() {
     const postId = localStorage.getItem('postId');
     if (!postId) {
-        console.error('No postId found in localStorage.');
         return;
     }
 
     try {
         const singlePost = await readPost(postId);
-        console.log(singlePost);
-
         const postWrapper = document.getElementById('post-wrapper');
         postWrapper.innerHTML += `
 <div class="wrapper-post-content">
@@ -42,26 +40,10 @@ async function displaySinglePost () {
             const username = this.getAttribute('data-username');
             localStorage.setItem('profileUsername', username);
             window.location.replace('/profile/');
-        })
+        });
     } catch (error) {
-        console.error('Error displaying single post:', error);
+        return;
     }
-
-
-    // document.querySelectorAll('.single-post').forEach((postElement) => {
-    //     const heartReactIcon = document.querySelector('.heart-react-icon');
-    //     const postId = postElement.getAttribute('data-id');
-    //
-    //     postElement.querySelector('.wrapper-react').addEventListener('click', async function () {
-    //         if(heartReactIcon.src.includes('heart-empty.png')){
-    //             heartReactIcon.src = '../../../../public/images/heart-filled.png';
-    //             heartReactIcon.alt = 'Filled Heart';
-    //         } else {
-    //             heartReactIcon.src = '../../../../public/images/heart-empty.png';
-    //             heartReactIcon.alt = 'Empty Heart';
-    //         }
-    //     })
-    // })
 }
 
 displaySinglePost();

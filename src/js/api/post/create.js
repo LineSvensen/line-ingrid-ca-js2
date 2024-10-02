@@ -1,6 +1,17 @@
-import {API_SOCIAL_POSTS, API_KEY} from "../constants.js";
+import { API_SOCIAL_POSTS, API_KEY } from "../constants.js";
 
-// Function to create a post via the API
+/**
+ * Function to create a post via the API
+ * @param {Object} postDetails - The details of the post to create.
+ * @param {string} postDetails.title - The title of the post (required).
+ * @param {string} postDetails.body - The body content of the post (optional).
+ * @param {Object} postDetails.media - The media associated with the post.
+ * @param {string} postDetails.media.url - The URL of the media (required).
+ * @param {string} postDetails.media.alt - Alternative text for the media (optional).
+ * @param {Array<string>} postDetails.tags - An array of tags associated with the post (optional).
+ * @returns {Promise<Object>} The created post data and the response status.
+ */
+
 export async function createPost({ title, body, media, tags }) {
     try {
         const accessToken = localStorage.getItem('accessToken');

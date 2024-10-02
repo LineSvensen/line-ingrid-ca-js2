@@ -1,9 +1,14 @@
 import { createPost } from "../../api/post/create.js";
 
+
+/**
+ * Function to handle post creation
+ * @param {Event} event - The event triggered by the form submission.
+ */
+
 export async function onCreatePost(event) {
     event.preventDefault();
 
-    // Gather the form input values
     const titleInput = event.target.title;
     const bodyInput = event.target.body;
     const mediaInput = event.target.media;
@@ -33,6 +38,5 @@ export async function onCreatePost(event) {
         }
     } catch (error) {
         alert("Error occurred while creating the post. Please try again.");
-        console.error(error);
     }
 }

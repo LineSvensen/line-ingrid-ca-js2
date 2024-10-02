@@ -1,6 +1,11 @@
 import { updatePost } from "../../api/post/update.js";
 import {readPost} from "../../api/post/read.js";
 
+/**
+ * Fetches the data of the post to be edited and populates the form fields.
+ * It retrieves the post ID from localStorage and uses it to read the post data.
+ * @throws {Error} Throws an error if there is an issue fetching the post data.
+ */
 export async function getPostData() {
     try {
         const postId = localStorage.getItem('editPostId')
@@ -22,6 +27,14 @@ export async function getPostData() {
     }
 }
 
+
+/**
+ * Handles the submission of the post update form.
+ * It retrieves form data, constructs an updated post object, and sends it to the server.
+ * @param {Event} event - The form submission event.
+ * @throws {Error} Throws an error if the postId is not found or if there is an issue updating the post.
+ */
+
 export async function onUpdatePost(event) {
     event.preventDefault();
 
@@ -32,7 +45,6 @@ export async function onUpdatePost(event) {
     }
 
     try {
-
         const postTitle = document.getElementById('title').value;
         const postBody = document.getElementById('body').value;
         const postMediaUrl = document.getElementById('urlMedia').value;
@@ -52,9 +64,10 @@ export async function onUpdatePost(event) {
             alert('Failed to update the post.');
         }
     } catch (error) {
-        console.error('Error updating post:', error);
         alert('An error occurred while updating the post.');
     }
+
 }
 
+}
 

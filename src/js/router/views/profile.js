@@ -3,7 +3,11 @@ import {readProfile} from "../../api/profile/read.js";
 import {readPostsByUser} from "../../api/post/read.js";
 
 authGuard();
-
+/**
+ *
+ * Function to render user profile and posts.
+ * @returns {Promise<void>}
+ */
 async function renderProfile() {
     const loggedInUsername = localStorage.getItem('loggedInUsername');
     const profileUsername = localStorage.getItem('profileUsername');
@@ -86,9 +90,6 @@ async function renderProfile() {
 }
 
 renderProfile();
-
-
-// router/views/router.js
 
 async function populateProfileForm() {
     const loggedInUsername = localStorage.getItem('loggedInUsername');
